@@ -30,7 +30,7 @@ function App() {
       <AppBar position="static" className={classes.title}>
       <Toolbar>
         <Typography variant="h6" >
-         Users list
+         Users Material App
         </Typography>
       </Toolbar>
     </AppBar>
