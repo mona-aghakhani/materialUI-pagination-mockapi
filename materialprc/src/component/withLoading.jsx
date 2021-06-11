@@ -2,8 +2,10 @@ import React, {useEffect, useState} from "react";
 import { useHistory, useParams } from "react-router-dom";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
 const useStyles = makeStyles((theme)=> ({
   progress: {
     marginLeft: '45%',
@@ -30,17 +32,44 @@ function withLoading(WrappedComponent,api) {
           setLoading(false);
           setData(data)
           if (response.status === 404) {
-              toast.error("not found")
+              // toast.error("not found")
+              NotificationManager.error("not found")
               // history.push('/')
             }
           // console.log(data);
           // return data
       }catch(err){
-          toast.error("request failed!");
+          // toast.error("request failed!");
+          NotificationManager.error("request failed!")
       }
        
       };
-        // const fetchData=async (id) =>{
+        
+
+      return(
+          <>
+           {/* <ToastContainer /> */}
+           <NotificationContainer/>
+{isLoading ? <CircularProgress className={classes.progress} size={100} thickness={4} disableShrink /> : <WrappedComponent  userData={data} {...props}  /> }
+          </>
+
+      )
+
+        // if (isLoading){
+        //     return <CircularProgress disableShrink />
+        // } else{
+        //     return <WrappedComponent  data={data} {...props}  />
+        // }
+    };
+
+    return WithLoadingComponent;
+}
+export default withLoading
+
+
+
+
+// const fetchData=async (id) =>{
         //     try{ const response = await fetch(`${id ? '/' + id : ""}`)
         //     // console.log(response);
         //     const data = await response.json()
@@ -94,22 +123,3 @@ function withLoading(WrappedComponent,api) {
         //             toast.error("request failed!");
         //         });
         // },[]) ;
-
-      return(
-          <>
-           <ToastContainer />
-{isLoading ? <CircularProgress className={classes.progress} size={100} thickness={4} disableShrink /> : <WrappedComponent  userData={data} {...props}  /> }
-          </>
-
-      )
-
-        // if (isLoading){
-        //     return <CircularProgress disableShrink />
-        // } else{
-        //     return <WrappedComponent  data={data} {...props}  />
-        // }
-    };
-
-    return WithLoadingComponent;
-}
-export default withLoading

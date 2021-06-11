@@ -110,28 +110,18 @@ const UserPage = ({userData}) => {
   useEffect(() => {
     // fetchUser(id);
     // setNewId(id)
-    inputRef.current.focus();
+    inputRef?.current.focus();
   }, []);
 
  
   const [value, setValue] = React.useState(0);
-
+// console.log(userData);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   return (
-    <div className={classes.root}>
-       <ToastContainer />
-       {/* <AppBar position="static" className={classes.title}>
-      <Toolbar>
-       
-        <Typography variant="h6" >
-         User Profile
-        </Typography>
-
-      </Toolbar>
-    </AppBar> */}
-     <Grid container  className={classes.grid} spacing={2}>
+    <>
+     {userData !== "Not found" && <Grid container  className={classes.grid} spacing={2}>
         {/* <Grid item xs={12}>
           <Paper className={classes.paper}>xs=12</Paper>
         </Grid> */}
@@ -223,10 +213,10 @@ const UserPage = ({userData}) => {
               variant="outlined"
               required
               fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
+              name="name"
+              
+              defaultValue={userData.name}
+              
               autoComplete="current-password"
             /> */}
           </Grid>
@@ -389,8 +379,9 @@ const UserPage = ({userData}) => {
         <Grid item xs={3}>
           <Paper className={classes.paper}>xs=3</Paper>
         </Grid> */}
-      </Grid>
-    </div>
+      </Grid>}
+     
+    </>
   );
 };
 // const x=newId;
@@ -544,3 +535,13 @@ export default withLoading(UserPage,'https://60b4f1e5fe923b0017c83389.mockapi.io
   //     toast.error("request failed!");
   //   }
   // };
+    // {/* <ToastContainer /> */}
+    //    {/* <AppBar position="static" className={classes.title}>
+    //   <Toolbar>
+       
+    //     <Typography variant="h6" >
+    //      User Profile
+    //     </Typography>
+
+    //   </Toolbar>
+    // </AppBar> */}

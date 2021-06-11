@@ -127,10 +127,11 @@ const useStyles2 = makeStyles({
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
+console.log(userData);
+console.log(typeof userData);
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} size='small' aria-label="custom pagination table">
+      {userData !== "Not found" && <Table className={classes.table} size='small' aria-label="custom pagination table">
       <TableHead>
           <TableRow>
           <TableCell>#</TableCell>
@@ -145,7 +146,7 @@ const useStyles2 = makeStyles({
           </TableRow>
         </TableHead>
         <TableBody stripedRows>
-          {(rowsPerPage > 0
+          {userData !== "Not found" && (rowsPerPage > 0
             ? userData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             : userData
           ).map((row) => (
@@ -187,7 +188,8 @@ const useStyles2 = makeStyles({
             />
           </TableRow>
         </TableFooter>
-      </Table>
+      </Table>}
+     
     </TableContainer>
   );
 }
