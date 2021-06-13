@@ -110,12 +110,14 @@ const UserPage = ({userData}) => {
   useEffect(() => {
     // fetchUser(id);
     // setNewId(id)
-    inputRef?.current.focus();
+    if (userData !== "Not found") {
+      inputRef?.current.focus();
+    }
   }, []);
 
  
   const [value, setValue] = React.useState(0);
-// console.log(userData);
+console.log(userData);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
